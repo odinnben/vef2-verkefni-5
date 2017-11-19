@@ -1,0 +1,206 @@
+@charset "UTF-8";
+@import "normalize";
+
+
+
+
+$Myflex : flex;
+$Mymargin : auto;
+$Mypadding : 20px;
+$Fontsize : 1.4em;
+$Myem : 60em;
+$Myem1 : -10em;
+$Myem2 : 2em;
+$Myem3 : 3em;
+$myColor0 : red;
+$myColor1 : navy;                           
+$myColor2 : #000080;
+$myColor3 : yellow;  
+$Mycolor4 : lime; 
+$Mycolor5 : white;    
+$Mycolor6 : orange;              
+$myStringVar: " with an appended string";   
+$myFontSize: 18px;                          
+$thinBorder: 1px solid $myColor1;           
+$paddingVar: 10px 10px 10px 10px;      
+    
+
+body {
+    max-width: $Myem;
+    margin: $Mymargin;
+    font-size: $Fontsize;
+    h1,h2,h3,h4 {
+        font-family: arial;
+    }
+}
+header,article,footer,aside{
+    padding: $Mypadding;
+    
+}
+header {
+    background-color: $myColor0
+
+    
+}
+section {
+    display: flex;
+    flex-flow: column;
+}
+article  {
+    flex:1;
+    background-color: $myColor1;
+    &:hover {
+        background-color: lighten($myColor1,30%);
+    }
+
+}
+aside{
+    flex:1;
+    background-color: $myColor3;
+        &:hover {
+        background-color: invert($myColor3);
+    }
+}
+footer {
+    background-color: $Mycolor4;
+    margin-bottom: $Myem2; 
+        &:hover {
+        background-color: darken($Mycolor4,10%);
+    }
+}
+label{
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    left: 0;
+    right: 0;
+    background-color: $myColor0;
+    padding: $paddingVar;
+    font-size: $Fontsize;
+    z-index: 999;
+}
+input[type=checkbox]:checked ~ .menu {
+    display: block;
+    position: fixed;
+    bottom: 1.8em;
+    transition: all 0.4s ease;
+}
+.menu{
+    position: fixed;
+    bottom: $Myem1;
+    transition: all 0.4s ease;
+
+}
+.menu li{
+        background-color: $myColor0;
+        padding: $paddingVar;
+        margin :0;
+        text-align: center;
+
+}
+.menu a{
+    color: $Mycolor5
+}
+.box{
+    display: flex;
+    flex-flow: none
+}
+.box a{
+    color: $Mycolor5;
+}
+@mixin box {
+    height: $Myem3;
+    width: $Myem3;
+    line-height: $Myem3;
+    text-align: center;
+}
+@mixin litur($liturinn) {
+    background-color: $liturinn;
+}
+.a{
+    @include litur($Mycolor6);
+    @include box;
+
+}
+.b{
+    @include litur(navy);
+    @include box;
+}
+.c{
+    @include litur($Mycolor4);
+    @include box;
+}
+.d{
+    @include litur(yellow);
+    @include box;
+}
+@media screen and (min-width:30em) and (max-width: 48em){
+    section{
+        display: block;
+    }
+    aside{
+        width: 50%;
+        box-sizing: border-box;
+        float: left;
+    }
+    .myndir img{
+        width: 50%;
+        float: left;
+    }
+}
+@media screen and (min-width:48em){
+    .menu{
+        position: relative;
+        width: 100%;
+        top: 0;
+        background-color: darkred;
+        margin: 0;
+        text-align: center;
+        padding: 0;
+    }
+    label{
+        display: none;
+    }
+    .menu li{
+        display: inline-block;
+        background-color: darkred;
+        bottom: none;
+        padding: 10px;
+        margin:0;
+        bottom: 0;
+        text-align: center;
+    }
+    .menu a{
+        color: white;
+        text-decoration: none;
+    }
+    .menu a :hover{
+        background-color: red;
+    }
+    section{
+        display: flex;
+        flex-flow: row;
+    }
+    .aside1{
+        order: 1;
+    }
+    .aside2{
+        order: 3;
+    }
+    article{
+        order: 2;
+    }
+    .myndir img{
+        width: 25%;
+        float: left;
+        padding-bottom:10px; 
+    }
+}
+@media screen and (min-width: 64em){
+    .box{
+        position: fixed;
+        top: 3em;
+        flex-flow: column;
+        left: 0;
+    }
+}
