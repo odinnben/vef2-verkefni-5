@@ -1,0 +1,115 @@
+@charset "UTF-8";
+@import "normalize";
+
+$Mycolor : red;
+$Mycolor2 : navy;
+$Mycolor3 : black;
+$Myborder : 3px solid $Mycolor;
+$Mypadding : 1.5em 2em;
+$Mymargin : 20px;
+$Mymargin1 : 40 px;
+
+
+
+@mixin box{
+    border: $Myborder;
+    padding: $Mypadding;
+    color: $Mycolor3;
+    background-color: darken($Mycolor2,6%);
+    &:hover{
+        color: darken($Mycolor3,10%);
+    }
+}
+@mixin texti($Mycolor,$size){
+    color: $Mycolor;
+    font-size: $size;
+    &:hover{
+        color: darken($Mycolor,10%);
+    }
+}
+
+
+.box{
+    grid-area: box;
+    width: 100%;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-areas:
+     "left"
+     "article"
+     "right"
+}
+
+.left {
+    grid-area: left;
+    @include box;
+}
+.right {
+    grid-area: right;
+    @include box;
+}
+
+@media only screen and (min-width: 500px)  {
+    .box {
+        grid-template-columns: auto auto;
+        grid-template-areas:
+        "article article"
+        "left   right";
+    }
+    header{
+        grid-template-columns: auto auto;
+        grid-template-areas:
+        " h1";
+        h1{
+            text-align: center;
+        }
+    }
+}
+
+@media only screen and (min-width: 800px)   {
+    .box {
+        grid-gap: $Mymargin;
+        grid-template-columns: 25% auto 25%;
+        grid-template-areas:
+        "left   article   right";
+    }
+}
+body {
+    background-color: $Mycolor2;
+    font-family: arial;
+    display: grid;
+    grid-gap: 1em;
+    max-width: 55em;
+    width: 100%;
+    margin: 0 auto;
+    grid-template-areas:
+     "header"
+     "box"
+     "footer"
+}
+header {
+    grid-area: header;
+    display: inline-grid;
+    @include box;
+    text-align: center;
+    margin-top: $Mymargin;
+    @include texti($Mycolor,20px);
+    justify-content: center;
+    grid-template-columns: auto;
+    grid-template-areas:
+    "h1";
+    h1{
+        grid-area: h1;
+        text-align: center;
+    }
+}
+article{
+    grid-area: article;
+    @include box;
+}
+footer {
+    grid-area: footer;
+    @include box;
+    @include texti($Mycolor,20px);
+    font-weight: arial;
+}
